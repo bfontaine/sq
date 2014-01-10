@@ -23,12 +23,14 @@ Available options:
 
 - `-o`: choose the output directory
 
+The regex is case-sensitive and is matched against the whole URL.
+
 In a Ruby file:
 
 ```ruby
 require 'sq'
 
-urls = SQ.query('http://example.com', /important/)
+urls = SQ.query('http://example.com', /important/i)
 ```
 
 ## Tests
