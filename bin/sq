@@ -1,0 +1,28 @@
+#! /usr/bin/env ruby
+# -*- coding: UTF-8 -*-
+
+require 'trollop'
+require 'sq'
+
+opts = Trollop.options do
+  version "sq #{UD.version}"
+  banner <<-EOS
+sq is a bulk PDFs downloader
+
+Usage:
+    sq [options] <uri> [<regex>]
+where [options] are:
+EOS
+
+  opt :directory, :short => '-o', 'Choose the output directory', :type => :string, :default => '.'
+end
+
+if ARGV.empty?
+  puts 'Error: No URI provided. Use -h or --help to see the help.'
+  exit 1
+end
+
+url, *regex_parts = ARGV
+regex = regex_parts.join(' ')
+
+SQ.process(url, Regexp.new(regex), opts)
