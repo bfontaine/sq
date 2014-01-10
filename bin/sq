@@ -5,7 +5,7 @@ require 'trollop'
 require 'sq'
 
 opts = Trollop.options do
-  version "sq #{UD.version}"
+  version "sq #{SQ.version}"
   banner <<-EOS
 sq is a bulk PDFs downloader
 
@@ -14,7 +14,7 @@ Usage:
 where [options] are:
 EOS
 
-  opt :directory, :short => '-o', 'Choose the output directory', :type => :string, :default => '.'
+  opt :directory, 'Choose the output directory', :short => '-o', :type => :string, :default => '.'
 end
 
 if ARGV.empty?
