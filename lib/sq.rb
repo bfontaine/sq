@@ -1,17 +1,13 @@
-#! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 
 require 'uri'
 require 'open-uri'
 require 'nokogiri'
 require 'fileutils'
+require File.expand_path(File.dirname __FILE__) + '/version'
 
 module SQ
   class << self
-    def version
-      '0.0.1'
-    end
-
     def user_agent
       "SQ/#{version} +github.com/bfontaine/sq"
     end
