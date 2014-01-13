@@ -15,6 +15,7 @@ where [options] are:
 EOS
 
   opt :directory, 'Choose the output directory', :short => '-o', :type => :string, :default => '.'
+  opt :verbose, 'Print more info', :short => '-V', :type => :bool, :default => false
 end
 
 if ARGV.empty?

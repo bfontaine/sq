@@ -35,13 +35,20 @@ module SQ
 
     def process(uri, regex=/./, opts={})
       uris = self.query(uri, regex)
+
+      puts "Found #{uris.count} PDFs." if opts[:verbose]
+
       return 0 if uris.empty?
 
       out = File.expand_path(opts[:directory] || '.')
 
-      Dir.mkdir(out) unless Dir.exists?(out)
+      unless Dir.exists?(out)
+        puts "-> mkdir #{out}" if opts[:verbose]
+        Dir.mkdir(out)
+      end
 
       uris.each do |u|
+        puts "Downloading #{u[:name]}..." if opts[:verbose]
         open("#{out}/#{u[:name]}", 'wb') do |f|
           open(u[:uri], 'rb') do |resp|
             f.write(resp.read)
