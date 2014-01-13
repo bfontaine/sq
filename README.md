@@ -22,6 +22,7 @@ $ sq [-o <directory>] <url> [<regex>]
 Available options:
 
 - `-o`: choose the output directory
+- `-V`: be more verbose
 
 The regex is case-sensitive and is matched against the whole URL.
 
