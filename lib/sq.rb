@@ -4,6 +4,7 @@ require 'uri'
 require 'open-uri'
 require 'nokogiri'
 require 'fileutils'
+require 'ruby-progressbar'
 require File.expand_path(File.dirname __FILE__) + '/version'
 
 module SQ
@@ -31,8 +32,9 @@ module SQ
 
     def process(uri, regex=/./, opts={})
       uris = self.query(uri, regex)
+      count = uris.count
 
-      puts "Found #{uris.count} PDFs." if opts[:verbose]
+      puts "Found #{count} PDFs:" if opts[:verbose]
 
       return 0 if uris.empty?
 
@@ -43,11 +45,14 @@ module SQ
         Dir.mkdir(out)
       end
 
+      p = ProgressBar.create(:title => "PDFs", :total => count)
+
       uris.each do |u|
-        puts "Downloading #{u[:name]}..." if opts[:verbose]
         open("#{out}/#{u[:name]}", 'wb') do |f|
           open(u[:uri], 'rb') do |resp|
             f.write(resp.read)
+            p.log u[:name] if opts[:verbose]
+            p.increment
           end
         end
       end
