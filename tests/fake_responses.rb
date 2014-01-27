@@ -55,3 +55,27 @@ FakeWeb.register_uri(
   "#{BASE_URL}/bar",
   :body => html('<a href="bar1.pdf">pdf 1</a><a href="bar2.pdf">pdf 2</a>')
 )
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/ab/so/lu/te",
+  :body => html('<a href="/bar1.pdf">pdf 1</a>')
+)
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/malformed1",
+  :body => html('<p><a href="/bar1.pdf">pdf 1</p>')
+)
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/malformed2",
+  :body => html('<p><a href=bar1.pdf >pdf 1</a></p>')
+)
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/malformed3",
+  :body => html('<p><a foo="bar" HrEF="/bar1.pdf" >pdf 1</p>')
+)

@@ -34,4 +34,20 @@ class SQ_query_test < Test::Unit::TestCase
     assert_equal(pdfs, SQ.query("#{@http}/bar", /./))
   end
 
+  def test_absolute_path
+    pdfs = [
+      {:uri => "#{@http}/bar1.pdf", :name => 'bar1.pdf'}
+    ]
+    assert_equal(pdfs, SQ.query("#{@url}/ab/so/lu/te", /./))
+  end
+
+  def test_malformed_html
+    pdfs = [
+      {:uri => "#{@http}/bar1.pdf", :name => 'bar1.pdf'}
+    ]
+    assert_equal(pdfs, SQ.query("#{@url}/malformed1", /./))
+    assert_equal(pdfs, SQ.query("#{@url}/malformed2", /./))
+    assert_equal(pdfs, SQ.query("#{@url}/malformed3", /./))
+  end
+
 end
