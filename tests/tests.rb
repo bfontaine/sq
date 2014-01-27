@@ -16,10 +16,15 @@ end
 
 class SQTests < Test::Unit::TestCase
 
-  # == UD#version == #
+  # == SQ#version == #
 
   def test_sq_version
     assert(SQ.version =~ /^\d+\.\d+\.\d+/)
+  end
+
+  # == SQ#user_agent == #
+  def test_sq_ua
+    assert(SQ.user_agent =~ /^SQ\/\d+\.\d+\.\d+/)
   end
 
 end
