@@ -17,7 +17,7 @@ gem install sq
 From the command-line:
 
 ```
-$ sq [-o <directory>] <url> [<regex>]
+$ sq [-o <directory>] [-F <format>] <url> [<regex>]
 ```
 
 Available options:
@@ -34,14 +34,16 @@ The output format is used for each PDF filename. It’s a string with zero or
 more special strings that will be replaced by a special value.
 
 ```
-%n: PDF number, starting at 0
-%N: PDF number, starting at 1
-%c: total number of PDFs
-%s: name of the PDF, extracted from its URI, without `.pdf`
-%S: name of the PDF, extracted from the link text
-%_: same as %S, but spaces are replaced with underscores
-%-: same as %S, but spaces are replaced with hyphens
-%%: litteral %
+%n - PDF number, starting at 0
+%N - PDF number, starting at 1
+%z - same as %n, but zero-padded
+%Z - same as %Z, but zero-padded
+%c - total number of PDFs
+%s - name of the PDF, extracted from its URI, without `.pdf`
+%S - name of the PDF, extracted from the link text
+%_ - same as %S, but spaces are replaced with underscores
+%- - same as %S, but spaces are replaced with hyphens
+%% - litteral %
 ```
 
 ## API

@@ -45,10 +45,14 @@ module SQ
       opts[:number] ||= 0
       opts[:count]  ||= 0
 
+      padded_fmt = "%0#{Math.log(opts[:count], 10).ceil}d"
+
       fmt.gsub(/%./) do |f|
         case f
         when '%n' then opts[:number]
         when '%N' then opts[:number]+1
+        when '%z' then padded_fmt % opts[:number]
+        when '%Z' then padded_fmt % (opts[:number]+1)
         when '%c' then opts[:count]
         when '%s' then doc[:name].sub(/\.pdf$/i, '')
         when '%S' then doc[:text]

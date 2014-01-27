@@ -28,6 +28,14 @@ class SQ_format_test < Test::Unit::TestCase
     assert_equal('1', SQ.format(@foo, '%N', @opts))
   end
 
+  def test_format_pdf_padded_number0
+    assert_equal('00', SQ.format(@foo, '%z', @opts))
+  end
+
+  def test_format_pdf_padded_number1
+    assert_equal('01', SQ.format(@foo, '%Z', @opts))
+  end
+
   def test_format_pdf_count
     assert_equal('42', SQ.format(@foo, '%c', @opts))
   end
