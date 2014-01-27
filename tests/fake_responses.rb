@@ -4,17 +4,6 @@ require 'fakeweb'
 
 FakeWeb.allow_net_connect = false
 
-#Dir["#{RESPONSES_DIR}/*.json"].each do |f|
-#  next if f !~ /\/(\w+)\.json$/
-#  term = $1
-#  puts "registering fake response for #{term}."
-#  FakeWeb.register_uri(
-#    :get,
-#    "#{BASE_URL}?term=#{term}",
-#    :body => File.read(f)
-#  )
-#end
-
 def html(b)
   <<-EOHTML
     <!doctype html>
@@ -55,43 +44,43 @@ FakeWeb.register_uri(
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/bar",
-  :body => html('<a href="bar1.pdf">pdf 1</a><a href="bar2.pdf">pdf 2</a>')
+  :body => html('<a href="bar1.pdf">bar1</a><a href="bar2.pdf">bar2</a>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/ab/so/lu/te",
-  :body => html('<a href="/bar1.pdf">pdf 1</a>')
+  :body => html('<a href="/bar1.pdf">bar</a>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/malformed1",
-  :body => html('<p><a href="/bar1.pdf">pdf 1</p>')
+  :body => html('<p><a href="/bar1.pdf">bar</p>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/malformed2",
-  :body => html('<p><a href=bar1.pdf >pdf 1</a></p>')
+  :body => html('<p><a href=bar1.pdf >bar</a></p>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/malformed3",
-  :body => html('<p><a foo="bar" HrEF="/bar1.pdf" >pdf 1</p>')
+  :body => html('<p><a foo="bar" HrEF="/bar1.pdf" >bar</p>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/one",
-  :body => html('<a href="/bar.pdf">pdf 1</a>')
+  :body => html('<a href="/bar.pdf">bar1</a>')
 )
 
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/two",
-  :body => html('<a href="/bar.pdf">pdf 1</a><a href="/foo.pdf">pdf 1</a>')
+  :body => html('<a href="/bar.pdf">bar</a><a href="/foo.pdf">foo</a>')
 )
 
 ## PDFs ##
