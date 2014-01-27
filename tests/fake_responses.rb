@@ -32,6 +32,8 @@ end
 BASE_URL = 'example.com'
 HTTP_URL = "http://#{BASE_URL}"
 
+## simple queries ##
+
 FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/no-links",
@@ -78,4 +80,24 @@ FakeWeb.register_uri(
   :get,
   "#{BASE_URL}/malformed3",
   :body => html('<p><a foo="bar" HrEF="/bar1.pdf" >pdf 1</p>')
+)
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/one",
+  :body => html('<a href="/bar.pdf">pdf 1</a>')
+)
+
+## PDFs ##
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/bar.pdf",
+  :body => '%PDFbar'
+)
+
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/foo.pdf",
+  :body => '%PDFfoo'
 )
