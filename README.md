@@ -1,6 +1,7 @@
 # sq
 
 [![Build Status](https://travis-ci.org/bfontaine/sq.png?branch=master)](https://travis-ci.org/bfontaine/sq)
+[![Gem Version](https://badge.fury.io/rb/sq.png)](http://badge.fury.io/rb/sq)
 
 **sq** is a web scrapping tool for PDFs. Give it an URL and an optional regex,
 and it’ll download all PDFs linked on it.
