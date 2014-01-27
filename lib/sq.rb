@@ -55,7 +55,7 @@ module SQ
             p.increment
           end
         end
-      end
+      end.count
     end
   end
 end
