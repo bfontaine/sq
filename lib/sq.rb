@@ -9,10 +9,15 @@ require File.expand_path(File.dirname __FILE__) + '/version'
 
 module SQ
   class << self
+    # return the user-agent used by SQ
     def user_agent
       "SQ/#{version} +github.com/bfontaine/sq"
     end
 
+    # query an URI and return a list of PDFs. Each PDF is an hash with two
+    # keys: :uri is its absolute URI, :name is its name (last part of its URI).
+    # @uri [String]
+    # @regex [Regexp]
     def query(uri, regex=/./)
       uri = 'http://' + uri unless uri =~ /^https?:\/\//
 
@@ -30,6 +35,12 @@ module SQ
       end
     end
 
+    # query an URI and download all PDFs which match the regex. It returns the
+    # number of downloaded PDFs.
+    # @uri   [String]
+    # @regex [Regexp] Regex to use to match PDF URIs
+    # @opts  [Hash]   Supported options: :verbose, :directory (specify the
+    #                 directory to use for output instead of the current one)
     def process(uri, regex=/./, opts={})
       uris = self.query(uri, regex)
       count = uris.count
