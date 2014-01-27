@@ -22,10 +22,29 @@ $ sq [-o <directory>] <url> [<regex>]
 
 Available options:
 
+- `-F`: output format (see below), default is `%s.pdf`
 - `-o`: choose the output directory
 - `-V`: be more verbose
 
 The regex is case-sensitive and is matched against the whole URL.
+
+### Formats
+
+The output format is used for each PDF filename. It’s a string with zero or
+more special strings that will be replaced by a special value.
+
+```
+%n: PDF number, starting at 0
+%N: PDF number, starting at 1
+%c: total number of PDFs
+%s: name of the PDF, extracted from its URI, without `.pdf`
+%S: name of the PDF, extracted from the link text
+%_: same as %S, but spaces are replaced with underscores
+%-: same as %S, but spaces are replaced with hyphens
+%%: litteral %
+```
+
+## API
 
 In a Ruby file:
 

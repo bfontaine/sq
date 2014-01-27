@@ -14,8 +14,9 @@ module SQ
       "SQ/#{version} +github.com/bfontaine/sq"
     end
 
-    # query an URI and return a list of PDFs. Each PDF is an hash with two
-    # keys: :uri is its absolute URI, :name is its name (last part of its URI).
+    # query an URI and return a list of PDFs. Each PDF is an hash with three
+    # keys: +:uri+ is its absolute URI, +:name+ is its name (last part of its
+    # URI), and +:text+ is each link text.
     # @uri [String]
     # @regex [Regexp]
     def query(uri, regex=/./)
@@ -36,12 +37,37 @@ module SQ
       end
     end
 
+    # Output a formatted filename.
+    # @doc [Hash]   as returned from +SQ.query+.
+    # @fmt [String]
+    # @opts [Hash] additional info.
+    def format(doc, fmt='%s.pdf', opts={})
+      opts[:number] ||= 0
+      opts[:count]  ||= 0
+
+      fmt.gsub(/%./) do |f|
+        case f
+        when '%n' then opts[:number]
+        when '%N' then opts[:number]+1
+        when '%c' then opts[:count]
+        when '%s' then doc[:name].sub(/\.pdf$/i, '')
+        when '%S' then doc[:text]
+        when '%_' then doc[:text].gsub(/\s+/, '_')
+        when '%-' then doc[:text].gsub(/\s+/, '-')
+        when '%%' then '%'
+        end
+      end
+    end
+
     # query an URI and download all PDFs which match the regex. It returns the
     # number of downloaded PDFs.
     # @uri   [String]
     # @regex [Regexp] Regex to use to match PDF URIs
-    # @opts  [Hash]   Supported options: :verbose, :directory (specify the
-    #                 directory to use for output instead of the current one)
+    # @opts  [Hash]   Supported options: +:verbose+, +:directory+ (specify the
+    #                 directory to use for output instead of the current one),
+    #                 and +:format+ the output format. See the README for
+    #                 details.
+    #
     def process(uri, regex=/./, opts={})
       uris = self.query(uri, regex)
       count = uris.count
@@ -51,6 +77,7 @@ module SQ
       return 0 if uris.empty?
 
       out = File.expand_path(opts[:directory] || '.')
+      fmt = opts[:format] || '%s.pdf'
 
       unless Dir.exists?(out)
         puts "-> mkdir #{out}" if opts[:verbose]
@@ -58,12 +85,15 @@ module SQ
       end
 
       p = ProgressBar.create(:title => "PDFs", :total => count)
+      i = 0
 
       uris.each do |u|
-        open("#{out}/#{u[:name]}", 'wb') do |f|
+        name = format(u, fmt, {:number => i, :count => count})
+        i += 1
+        open("#{out}/#{name}", 'wb') do |f|
           open(u[:uri], 'rb') do |resp|
             f.write(resp.read)
-            p.log u[:name] if opts[:verbose]
+            p.log name if opts[:verbose]
             p.increment
           end
         end

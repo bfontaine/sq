@@ -16,6 +16,7 @@ EOS
 
   opt :directory, 'Choose the output directory', :short => '-o', :type => :string, :default => '.'
   opt :verbose, 'Print more info', :short => '-V', :type => :bool, :default => false
+  opt :format, 'Filename format', :short => '-F', :type => :string, :default => '%s.pdf'
 end
 
 if ARGV.empty?
