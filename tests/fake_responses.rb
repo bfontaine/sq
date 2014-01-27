@@ -88,6 +88,12 @@ FakeWeb.register_uri(
   :body => html('<a href="/bar.pdf">pdf 1</a>')
 )
 
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/two",
+  :body => html('<a href="/bar.pdf">pdf 1</a><a href="/foo.pdf">pdf 1</a>')
+)
+
 ## PDFs ##
 
 FakeWeb.register_uri(
