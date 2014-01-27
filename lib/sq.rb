@@ -53,7 +53,7 @@ module SQ
 
       unless Dir.exists?(out)
         puts "-> mkdir #{out}" if opts[:verbose]
-        Dir.mkdir(out)
+        FileUtils.mkdir_p(out)
       end
 
       p = ProgressBar.create(:title => "PDFs", :total => count)
