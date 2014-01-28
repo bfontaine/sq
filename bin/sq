@@ -14,14 +14,35 @@ Usage:
 where [options] are:
 EOS
 
-  opt :directory, 'Choose the output directory', :short => '-o', :type => :string, :default => '.'
   opt :verbose, 'Print more info', :short => '-V', :type => :bool, :default => false
+  opt :directory, 'Choose the output directory', :short => '-o', :type => :string, :default => '.'
   opt :format, 'Filename format', :short => '-F', :type => :string, :default => '%s.pdf'
+  opt :formats, 'List available formats', :type => :bool, :default => false
 end
 
-if ARGV.empty?
+if ARGV.empty? && !opts[:formats]
   puts 'Error: No URI provided. Use -h or --help to see the help.'
   exit 1
+end
+
+if opts[:formats]
+  puts <<-EOFMTS
+A format is a string with zero or more placeholders, shown below. The default
+is '%s.pdf'.
+
+  %n - PDF number, starting at 0
+  %N - PDF number, starting at 1
+  %z - same as %n, but zero-padded
+  %Z - same as %Z, but zero-padded
+  %c - total number of PDFs
+  %s - name of the PDF, extracted from its URI, without `.pdf`
+  %S - name of the PDF, extracted from the link text
+  %_ - same as %S, but spaces are replaced with underscores
+  %- - same as %S, but spaces are replaced with hyphens
+  %% - litteral %
+
+  EOFMTS
+  exit(0)
 end
 
 url, *regex_parts = ARGV

@@ -25,6 +25,7 @@ Available options:
 - `-F`: output format (see below), default is `%s.pdf`
 - `-o`: choose the output directory
 - `-V`: be more verbose
+- `--formats`: list available formats
 
 The regex is case-sensitive and is matched against the whole URL.
 
