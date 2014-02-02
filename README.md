@@ -30,6 +30,22 @@ Available options:
 
 The regex is case-sensitive and is matched against the whole URL.
 
+### Examples
+
+```sh
+# Get all PDFs from a Web page
+sq http://liafa.fr/~yunes/cours/interfaces/
+
+# Use a regexp to get only those you want
+sq http://liafa.fr/~yunes/cours/interfaces/ 'fiches/\d+'
+
+# Be more verbose
+sq -V http://liafa.fr/~yunes/cours/interfaces/ 'fiches/\d+'
+
+# Add a filename format
+sq -V http://liafa.fr/~yunes/cours/interfaces/ 'fiches/\d+' -F 'class-%Z.pdf'
+```
+
 ### Formats
 
 The output format is used for each PDF filename. It’s a string with zero or
