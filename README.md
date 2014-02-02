@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bfontaine/sq.png?branch=master)](https://travis-ci.org/bfontaine/sq)
 [![Gem Version](https://badge.fury.io/rb/sq.png)](http://badge.fury.io/rb/sq)
+[![Coverage Status](https://coveralls.io/repos/bfontaine/sq/badge.png)](https://coveralls.io/r/bfontaine/sq)
 
 **sq** is a web scrapping tool for PDFs. Give it an URL and an optional regex,
 and it’ll download all PDFs linked on it.
@@ -66,13 +67,4 @@ $ bundle install
 $ rake test
 ```
 
-Set the `COVERAGE` environment variable to activate the code
-coverage report, e.g.:
-
-```
-$ export COVERAGE=1; rake test
-```
-
-
-It’ll generate a `coverage/index.html`, which you can open in a
-Web browser.
+It’ll generate a `coverage/index.html`, which you can open in a Web browser.
