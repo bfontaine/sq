@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/bfontaine/sq.png?branch=master)](https://travis-ci.org/bfontaine/sq)
 [![Gem Version](https://badge.fury.io/rb/sq.png)](http://badge.fury.io/rb/sq)
 [![Coverage Status](https://coveralls.io/repos/bfontaine/sq/badge.png)](https://coveralls.io/r/bfontaine/sq)
+[![Inline docs](http://inch-pages.github.io/github/bfontaine/sq.png)](http://inch-pages.github.io/github/bfontaine/sq)
 [![Dependency Status](https://gemnasium.com/bfontaine/sq.png)](https://gemnasium.com/bfontaine/sq)
 
 **sq** is a web scrapping tool for PDFs. Give it an URL and an optional regex,
