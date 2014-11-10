@@ -28,8 +28,16 @@ module SQ
       doc = Nokogiri::HTML(open(uri, 'User-Agent' => user_agent))
       links = doc.css('a[href]')
 
-      uris = links.map { |a| [a.text, URI.join(uri, a.attr('href'))] }
-      uris.select! { |_,u| u.path =~ /\.pdf$/i && u.to_s =~ regex }
+      uris = links.map do |a|
+        full = begin
+                 URI.join(uri, a.attr('href'))
+               rescue
+                 nil
+               end
+
+        [a.text, full]
+      end
+      uris.select! { |_,u| u && u.path =~ /\.pdf$/i && u.to_s =~ regex }
 
       uris.map do |text,u|
         {
