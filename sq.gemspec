@@ -18,6 +18,9 @@ Gem::Specification.new do |s|
     s.require_path  = 'lib'
     s.executables  << 'sq'
 
+    s.signing_key   = File.expand_path('~/.gem/gem-private_key.pem')
+    s.cert_chain    = ['certs/bfontaine.pem']
+
     s.add_runtime_dependency 'nokogiri', '~>1.6'
     s.add_runtime_dependency 'trollop',  '~>2.0'
     s.add_runtime_dependency 'ruby-progressbar', '~>1.4'
