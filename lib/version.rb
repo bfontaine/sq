@@ -5,7 +5,7 @@ module SQ
 
     # @return [String] current gem's version
     def version
-      '0.1.3'
+      '0.1.4'
     end
   end
 end
