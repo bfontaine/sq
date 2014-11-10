@@ -50,4 +50,8 @@ class SQ_query_test < Test::Unit::TestCase
     assert_equal(pdfs, SQ.query("#{@url}/malformed3", /./))
   end
 
+  def test_issue_5
+    assert_equal([], SQ.query("#{@url}/issue5", /./))
+  end
+
 end

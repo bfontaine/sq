@@ -83,6 +83,21 @@ FakeWeb.register_uri(
   :body => html('<a href="/bar.pdf">bar</a><a href="/foo.pdf">foo</a>')
 )
 
+# Issue #5
+# https://github.com/bfontaine/sq/issues/5
+FakeWeb.register_uri(
+  :get,
+  "#{BASE_URL}/issue5",
+  :body => html(<<-EOH
+    <ul>
+    <li>quelques <a
+    href="http://fr.wikipedia.org/wiki/Développement_décimal_de_l%27unité">e
+    </a> sur</li>
+    </ul>
+EOH
+  )
+)
+
 ## PDFs ##
 
 FakeWeb.register_uri(
