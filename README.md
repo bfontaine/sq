@@ -56,7 +56,7 @@ more special strings that will be replaced by a special value.
 %n - PDF number, starting at 0
 %N - PDF number, starting at 1
 %z - same as %n, but zero-padded
-%Z - same as %Z, but zero-padded
+%Z - same as %N, but zero-padded
 %c - total number of PDFs
 %s - name of the PDF, extracted from its URI, without `.pdf`
 %S - name of the PDF, extracted from the link text
