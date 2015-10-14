@@ -101,7 +101,7 @@ module SQ
         FileUtils.mkdir_p(out)
       end
 
-      p = ProgressBar.create(:title => "PDFs", :total => count)
+      p = ProgressBar.create(:title => "PDFs", :total => count, :format => "%t |%B| %j%% %c/%C")
       i = 0
 
       uris.each do |u|
